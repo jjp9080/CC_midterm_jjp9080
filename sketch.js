@@ -131,7 +131,7 @@ function draw() {
   if (frameCount > 1230 && frameCount <= 1300) {
     background(0);
   }
-  if (frameCount > 1300 && frameCount<=1700) {
+  if (frameCount > 1300 && frameCount<=1900) {
     for (i = 0; i < 8; i++) {
       randomShapes(1);
     }
@@ -140,7 +140,7 @@ function draw() {
       randomShapes(2);
     }
   }
-  if (frameCount > 1700 && frameCount <=2200) {
+  if (frameCount > 1900 && frameCount <=2200) {
     background(25, 0, 255);
   }
 }
