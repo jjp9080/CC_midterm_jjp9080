@@ -10,7 +10,6 @@ let incr;
 let change1;
 let color1, color2, color3, color4;
 let fast = 0;
-let sp = 30;
 let waves0;
 let waves1;
 let waves2;
@@ -34,11 +33,11 @@ function setup() {
   change1 = new changeColor(color1, color2, 0);
   createCanvas(windowWidth, windowHeight);
   waves0 = new waves(1, 100, 100);
-  waves1 = new waves(2, 100, 110);
-  waves2 = new waves(3, 90, 120);
-  waves3 = new waves(4, 80, 140);
-  waves4 = new waves(5, 70, 180);
-  waves5 = new waves(6, 60, 260);
+  waves1 = new waves(1, 100, 110);
+  waves2 = new waves(1, 90, 120);
+  waves3 = new waves(1, 80, 140);
+  waves4 = new waves(1, 70, 180);
+  waves5 = new waves(1, 60, 260);
 }
 
 
@@ -298,10 +297,10 @@ class waves {
       noFill();
 
       beginShape();
-      for (let x = 0; x < width; x += sp) {
+      for (let x = 0; x < width; x += 50) {
         let noiseScale = map(noise(x +this.s, x + this.s*2), 0, 1, this.i, this.j)
           curveVertex(x, (y+ noiseScale));
-        this.s++;
+        this.s+=2;
 
         endShape();
       }
@@ -324,10 +323,10 @@ function randomShapes(choice) {
   if (choice == 1) {
     noStroke();
     fill(random(25), random(255), random(255));
-    ellipse(random(width), random(height), random(3, 100), random(3, 100));
+    ellipse(random(width), random(height), random(3, 150), random(3, 150));
   } else {
     noStroke();
     fill(random(255), random(255), random(255));
-    rect(random(width), random(height), random(3, 100), random(3, 100));
+    rect(random(width), random(height), random(3, 150), random(3, 150));
   }
 }
