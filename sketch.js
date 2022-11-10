@@ -1,3 +1,9 @@
+/*
+Judith Park
+Creative Coding Midterm 2022
+
+Adjective: loud
+*/
 let radio1;
 let radio2;
 let incr;
@@ -19,6 +25,7 @@ let choice;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  //initializing the classes 
   radio1 = new radio(200, 200);
   radio2 = new radiozoom(width, height);
   incr = 1;
@@ -36,6 +43,7 @@ function setup() {
 
 
 function draw() {
+  //frameCount is how the animation will move along
   if (frameCount <= 50) {
     radioloop1();
   }
@@ -70,7 +78,10 @@ function draw() {
   }
   if (frameCount > 750 && frameCount <= 850) {
     background(235, 204, 228);
+    //changing noiseScale changes the scale of the wave1 class/waves2 method
     noiseScale = 0.02;
+    //m and n represent how much it will oscillate/move
+    //different for each scene
     m += 0.01;
     n += 0.01;
     calm2();
@@ -131,7 +142,7 @@ function draw() {
   if (frameCount > 1230 && frameCount <= 1300) {
     background(0);
   }
-  if (frameCount > 1300 && frameCount<=1900) {
+  if (frameCount > 1300 && frameCount<=1800) {
     for (i = 0; i < 8; i++) {
       randomShapes(1);
     }
@@ -140,11 +151,11 @@ function draw() {
       randomShapes(2);
     }
   }
-  if (frameCount > 1900 && frameCount <=2200) {
+  if (frameCount > 1800 && frameCount <=2200) {
     background(25, 0, 255);
   }
 }
-
+//5 functions for radioloop, the radios continue to get larger for each function
 function radioloop1() {
   background(0, 255, 247);
   for (x = -60; x <= width; x += 200) {
@@ -170,6 +181,7 @@ function radioloop2() {
 }
 function radioloop3() {
   background(0, 255, 247);
+  // translate random will shake the radios to represent the sound getting larger as it gets closer
   translate(random(-1, 1), random (-1, 1));
   for (x = -70; x <= width; x += 300) {
     for (y = -70; y <= height; y += 200) {
@@ -208,6 +220,7 @@ function radioloop5() {
   }
 }
 function radioZoom() {
+  //this zooms into the dial of the radio, which zooms into the sound waves playing inside the radio
   push();
   translate(width/6, height/6);
   scale(incr);
@@ -216,7 +229,7 @@ function radioZoom() {
   pop();
 }
 
-
+//radio class
 class radio {
   constructor(x, y) {
     this.x = x;
@@ -238,6 +251,7 @@ class radio {
     line(this.x + 10, 150, 170, 150);
   }
 }
+//class for radio zoom, used within the radio zoom function
 class radiozoom {
   constructor(x, y) {
     this.x = x;
@@ -250,6 +264,8 @@ class radiozoom {
     ellipse(this.x/5, this.y/2, this.x/2*incr, this.x/2*incr);
   }
 }
+//changes color once zoomed into the dial
+//changes subtly/gradually
 class changeColor {
   constructor(color1, color2, fast) {
     this.color1 = color1;
@@ -268,16 +284,7 @@ class changeColor {
     }
   }
 }
-function changeBackground() {
-  background(lerpColor(color1, color2, fast)); //https://p5js.org/reference/#/p5/lerpColor
-  fast += 0.01;
-  if (fast >= 4) {
-    fast = 0.0;
-    color1 = color2;
-    color2 = color(255, 192, 245);
-  }
-}
-
+//waves class, the 4 dark blue sound waves
 class waves {
   constructor(s, i, j) {
     this.s = s;
@@ -301,6 +308,7 @@ class waves {
     }
   }
 }
+//background big sound wave
 function calm2() {
   for (let x = 0; x < width; x++) {
     let noiseValue = noise(x * noiseScale + m, noiseScale + n);
@@ -310,14 +318,16 @@ function calm2() {
     n += 0.000001;
   }
 }
+//random shape generator, last scene
+//special thanks to mrm029
 function randomShapes(choice) {
   if (choice == 1) {
     noStroke();
-    fill(random(25), random(5), random(255), 50);
+    fill(random(25), random(255), random(255));
     ellipse(random(width), random(height), random(3, 100), random(3, 100));
   } else {
     noStroke();
-    fill(random(255), random(255), random(255), 90);
+    fill(random(255), random(255), random(255));
     rect(random(width), random(height), random(3, 100), random(3, 100));
   }
 }
